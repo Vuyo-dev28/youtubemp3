@@ -3,91 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube to MP3 Converter | Fast & Free YT2MP3 Magic</title>
+    <meta name="description" content="Convert YouTube videos to MP3 instantly and for free. Paste your YouTube link and download high-quality MP3 audio. No registration required.">
+    <meta name="keywords" content="YouTube to MP3, YT2MP3, YouTube MP3 Converter, Download MP3, Free YouTube Converter, YouTube Audio Download">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourdomain.com/">
+    <meta property="og:title" content="YouTube to MP3 Converter | Fast & Free YT2MP3 Magic">
+    <meta property="og:description" content="Convert YouTube videos to MP3 instantly and for free. Paste your YouTube link and download high-quality MP3 audio.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:image" content="/images/youtube2mp3icon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YouTube to MP3 Converter | Fast & Free YT2MP3 Magic">
+    <meta name="twitter:description" content="Convert YouTube videos to MP3 instantly and for free. Paste your YouTube link and download high-quality MP3 audio.">
+    <meta name="twitter:image" content="/images/youtube2mp3icon.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/times-new-roman" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/images/youtube2mp3icon.png" type="image/x-icon">
-    <title>YT2MP3 Magic</title>
-</head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516896657325862"
-     crossorigin="anonymous"></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VYKQ8W52L"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9VYKQ8W52L');
-</script>
-<body>
-    <div class="top-container">
-        <form id="form">
-            <p>by <a href="https://www.linkedin.com/in/sarthak-s-b622b022a/" target="_blank">sarthakvs</a></p>
-            <h1><i class="fa-brands fa-youtube"></i> Youtube to MP3 Magic</h1>
-            <h4>Enter Video URL</h4>
-            <div class="input-row">
-                <input type="text" id="video-url" placeholder="Video goes here">
-                <button type="submit" id="convert-btn">Convert!</button>
-            </div>
-            <div>
-                <p><b>Please wait 20-30 seconds after clicking Convert</b></p>
-                <p id="status-message"></p>
-            </div>
-        </form>
-
-        <!-- Download button placeholder -->
-        <div id="download-section" style="display:none; margin-top:20px;">
-            <p id="song-title"></p>
-            <a id="download-btn" href="" download>Click here to Download MP3</a>
-        </div>
-    </div>
-
-<script>
-    const form = document.getElementById('form');
-    const videoUrlInput = document.getElementById('video-url');
-    const downloadSection = document.getElementById('download-section');
-    const downloadBtn = document.getElementById('download-btn');
-    const songTitle = document.getElementById('song-title');
-    const statusMessage = document.getElementById('status-message');
-    const convertBtn = document.getElementById('convert-btn');
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Disable button to prevent multiple requests
-        convertBtn.disabled = true;
-        convertBtn.textContent = "Processing...";
-
-        downloadSection.style.display = 'none';
-        statusMessage.textContent = "Processing your request...";
-        const videoURL = videoUrlInput.value.trim();
-
-        try {
-            const response = await fetch('/convert-mp3', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url: videoURL })
-            });
-            const result = await response.json();
-
-            if(result.success){
-                songTitle.textContent = result.title;
-                downloadBtn.href = result.link;
-                downloadSection.style.display = 'block';
-                statusMessage.textContent = "Your MP3 is ready!";
-            } else {
-                statusMessage.textContent = result.message || "Something went wrong";
-            }
-        } catch (err) {
-            statusMessage.textContent = "Network error or API failed.";
-            console.log(err);
-        } finally {
-            // Re-enable button after response
-            convertBtn.disabled = false;
-            convertBtn.textContent = "Convert!";
+    <style>
+        body {
+            background: linear-gradient(135deg, #ef4444 0%, #334155 100%);
+            font-family: 'Inter', Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-    });
-</script>
+        main {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(30,41,59,0.15);
+            padding: 2.5rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .card h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ef4444;
+        }
+        .card h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #334155;
+        }
+        .input-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+        #video-url {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #video-url:focus {
+            border-color: #ef4444;
+        }
+        #convert-btn {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.7rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #convert-btn:disabled {
+            background: #fca5a5;
+            cursor: not-allowed;
+        }
+        .card p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        #status-message {
+            margin: 1rem 0 0.5rem 0;
+            color: #334155;
+            font-weight: 500;
+            min-height: 24px;
+        }
+        #download-section {
+            display: none;
+            margin-top: 1.5rem;
+            background: #f1f5f9;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        #song-title {
+            font-weight: 600;
+            color: #ef4444;
+            margin-bottom: 0.5rem;
+        }
+        #download-btn {
+            display: inline-block;
+            background: #22c55e;
+            color: #fff;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        #download-btn:hover {
+            background: #16a34a;
+        }
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #ef4444;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @media (max-width: 500px) {
+            .card {
+                padding: 1.2rem 0.5rem;
+            }
+            .input-row {
+                flex-direction: column;
+            }
+            #convert-btn {
+                width: 100%;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "YouTube to MP3 Converter",
+      "url": "https://yourdomain.com/",
+      "description": "Convert YouTube videos to MP3 instantly and for free. Paste your YouTube link and download high-quality MP3 audio.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://yourdomain.com/?url={url}",
+        "query-input": "required name=url"
+      }
+    }
+    </script>
+</head>
+<body>
+    <main>
+        <section class="card" aria-label="YouTube to MP3 Converter">
+            <header>
+                <p>by <a href="" target="_blank" style="color:#ef4444;text-decoration:none;">iFlex Prod.</a></p>
+                <h1>
+                    <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+                    <span>YouTube to MP3 Converter</span>
+                </h1>
+                <h2>Convert YouTube videos to MP3 audio instantly</h2>
+            </header>
+            <form id="form" aria-label="YouTube to MP3 conversion form">
+                <label for="video-url" style="display:none;">YouTube Video URL</label>
+                <div class="input-row">
+                    <input type="text" id="video-url" name="video-url" placeholder="e.g. https://youtu.be/xyz123abcde" aria-required="true" aria-label="YouTube Video URL">
+                    <button type="submit" id="convert-btn" aria-label="Convert to MP3">Convert!</button>
+                </div>
+                <p><b>Please wait 20-30 seconds after clicking Convert</b></p>
+                <div id="status-message" role="status"></div>
+            </form>
+            <div id="download-section" aria-live="polite">
+                <p id="song-title"></p>
+                <a id="download-btn" href="" download aria-label="Download MP3">Download MP3</a>
+            </div>
+        </section>
+          <!-- <footer style="text-align:center; margin-top:2rem; color:#fff; font-size:0.9rem;">
+        © 2025 iFlex Prod. | Free YouTube to MP3 Converter
+    </footer> -->
+    </main>
+    <!-- <footer style="text-align:center; margin-top:2rem; color:#fff; font-size:0.9rem;">
+        © 2025 iFlex Prod. | Free YouTube to MP3 Converter
+    </footer> -->
+    <script>
+        const form = document.getElementById('form');
+        const videoUrlInput = document.getElementById('video-url');
+        const downloadSection = document.getElementById('download-section');
+        const downloadBtn = document.getElementById('download-btn');
+        const songTitle = document.getElementById('song-title');
+        const statusMessage = document.getElementById('status-message');
+        const convertBtn = document.getElementById('convert-btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            convertBtn.disabled = true;
+            convertBtn.textContent = "";
+            statusMessage.innerHTML = '<span class="spinner"></span>Processing your request...';
+            downloadSection.style.display = 'none';
+
+            const videoURL = videoUrlInput.value.trim();
+
+            try {
+                const response = await fetch('/convert-mp3', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: videoURL })
+                });
+                const result = await response.json();
+
+                if(result.success){
+                    songTitle.textContent = result.title;
+                    downloadBtn.href = result.link;
+                    downloadSection.style.display = 'block';
+                    statusMessage.textContent = "Your MP3 is ready!";
+                } else {
+                    statusMessage.textContent = result.message || "Something went wrong";
+                }
+            } catch (err) {
+                statusMessage.textContent = "Network error or API failed.";
+                console.log(err);
+            } finally {
+                convertBtn.disabled = false;
+                convertBtn.textContent = "Convert!";
+            }
+        });
+    </script>
 </body>
 </html>
