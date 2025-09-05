@@ -51,4 +51,7 @@ app.get('/', (req, res) => {
     res.render("index");
 });
 
-export default app;
+// ✅ Required for Render
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
