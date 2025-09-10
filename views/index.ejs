@@ -1,45 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Preconnect & Preload for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" as="style">
-    <link rel="preload" href="/images/youtube2mp3icon.png" as="image" type="image/png">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube to MP3 Converter | Fast & Free YT2MP3 Magic</title>
     <meta name="description" content="Convert YouTube videos to MP3 instantly and for free. Paste your YouTube link and download high-quality MP3 audio. No registration required.">
     <meta name="keywords" content="YouTube to MP3, YT2MP3, YouTube MP3 Converter, Download MP3, Free YouTube Converter, YouTube Audio Download">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://yourdomain.com/">
+    <link rel="canonical" href="https://youtubemp3.online/">
 
     <!-- Open Graph -->
     <meta property="og:title" content="YouTube to MP3 Converter | Fast & Free YT2MP3 Magic">
     <meta property="og:description" content="Convert YouTube videos to MP3 instantly and for free. Paste your YouTube link and download high-quality MP3 audio.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:url" content="https://youtubemp3.online/">
     <meta property="og:image" content="/images/youtube2mp3icon.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="YouTube to MP3 Converter | Fast & Free YT2MP3 Magic">
     <meta name="twitter:description" content="Convert YouTube videos to MP3 instantly and for free. Paste your YouTube link and download high-quality MP3 audio.">
     <meta name="twitter:image" content="/images/youtube2mp3icon.png">
-    <meta name="twitter:image:width" content="512">
-    <meta name="twitter:image:height" content="512">
 
-    <!-- Font Awesome (loaded async) -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"></noscript>
-
-    <!-- Google Fonts -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-
-    <link rel="icon" href="/images/youtube2mp3icon.png" type="image/png">
+    <link rel="icon" href="/images/youtube2mp3icon.png" type="image/x-icon">
 
     <style>
         body {
@@ -71,6 +56,10 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: #ef4444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4rem;
         }
         .card h2 {
             font-size: 1.1rem;
@@ -111,7 +100,7 @@
             cursor: not-allowed;
         }
         .card p {
-            color: #64748b;
+            color: #475569; /* darker gray for accessibility */
             font-size: 0.95rem;
         }
         #status-message {
@@ -194,7 +183,10 @@
             <header>
                 <p>by <a href="" target="_blank" style="color:#ef4444;text-decoration:none;">iFlex Prod.</a></p>
                 <h1>
-                    <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+                    <!-- Inline YouTube SVG -->
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="#ef4444" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M23.5 6.2s-.2-1.6-.8-2.3c-.8-.9-1.6-.9-2-1C17.9 2.6 12 2.6 12 2.6h0s-5.9 0-8.7.3c-.4 0-1.2.1-2 .9-.6.7-.8 2.3-.8 2.3S0 8.1 0 10v1.9c0 1.9.3 3.8.3 3.8s.2 1.6.8 2.3c.8.9 1.9.8 2.4.9 1.7.2 7.5.3 7.5.3s5.9 0 8.7-.3c.4 0 1.2-.1 2-.9.6-.7.8-2.3.8-2.3s.3-1.9.3-3.8V10c0-1.9-.3-3.8-.3-3.8zM9.5 14.8V7.7l6.4 3.5-6.4 3.6z"/>
+                    </svg>
                     <span>YouTube to MP3 Converter</span>
                 </h1>
                 <h2>Convert YouTube videos to MP3 audio instantly</h2>
@@ -215,19 +207,19 @@
         </section>
     </main>
 
-    <!-- Lazy-load Monetag script AFTER page load -->
     <script>
-    window.addEventListener("load", function() {
-      var s = document.createElement("script");
-      s.src = "https://fpyf8.com/88/tag.min.js";
-      s.setAttribute("data-zone","170013");
-      s.async = true;
-      document.body.appendChild(s);
-    });
-    </script>
+        // Lazy load Monetag after 5s
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                let s = document.createElement("script");
+                s.src = "https://fpyf8.com/88/tag.min.js";
+                s.setAttribute("data-zone","170013");
+                s.async = true;
+                document.body.appendChild(s);
+            }, 5000);
+        });
 
-    <!-- Conversion Logic -->
-    <script>
+        // Conversion logic
         const form = document.getElementById('form');
         const videoUrlInput = document.getElementById('video-url');
         const downloadSection = document.getElementById('download-section');
